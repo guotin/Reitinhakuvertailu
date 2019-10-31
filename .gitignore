@@ -1,0 +1,4 @@
+/PathFinder/.nb-gradle/
+/PathFinder/.gradle/
+/PathFinder/build/
+*.tmp
