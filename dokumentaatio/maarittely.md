@@ -24,8 +24,18 @@ niin, että algoritmin aikavaativuus olisi pienempää kuin Dijkstran algoritmil
 
 ## Ohjelman käyttö ja syötteet
 
-Ohjelma käyttää pääasiallisena syötteenään valmiiksi muodostettuja testisyötteitä. Lisäksi käyttäjältä kysytään
-minkä algoritmin avulla polku muodostetaan.
+Ohjelma käyttää pääasiallisena syötteenään valmiiksi muodostettuja testisyötteitä. Näistä käyttäjä voi valita mieleisensä.
+Lisäksi käyttäjältä kysytään minkä algoritmin avulla polku muodostetaan. Ohjelman ideana on lopuksi tulostaa käyttäjälle tietoja muodostetusta polusta, esimerkiksi askelten määrä ja sen löytämiseen käytetty aika.
+
+## Lähteet
+
+- A*-algoritmi: [Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
+
+- Dijkstran algoritmi: [Wikipedia](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
+
+- Syvyyshaku: [Wikipedia](https://en.wikipedia.org/wiki/Depth-first_search)
+
+- Tietorakenteet ja algoritmit - Antti Laaksonen - 2.10.2019: [Linkki kirjaan](https://www.cs.helsinki.fi/u/ahslaaks/tirakirja/)
 
 
 
