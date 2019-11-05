@@ -1,4 +1,6 @@
 apply plugin: 'java'
+ apply plugin: 'application'
+ mainClassName = 'application.ui.Main'
 
 sourceCompatibility = '1.8'
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
@@ -29,6 +31,7 @@ dependencies {
 }
 
 apply plugin: 'jacoco'
+
 
 jacocoTestReport {
     reports {
