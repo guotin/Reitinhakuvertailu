@@ -23,6 +23,10 @@ public class RoutefinderTest {
         assertEquals(0, routefinder.getDfsPathLength());
         assertEquals(0, routefinder.getDfsStepsTaken());
         assertFalse(routefinder.isDfsFoundPath());
+        assertArrayEquals(null, routefinder.getDfsMap());
+        assertArrayEquals(null, routefinder.getDijkstraMap());
+        assertEquals(0, routefinder.getDijkstraPathLength());
+        assertFalse(routefinder.isDijkstraFoundPath());
     }
     
     @Test
@@ -140,8 +144,8 @@ public class RoutefinderTest {
         routefinder.setMap(map);
         routefinder.findStartAndGoal();
         routefinder.findRouteDFS();
-        assertTrue(0 == routefinder.getDfsPathLength());
-        assertTrue(0 == routefinder.getDfsStepsTaken());
+        assertEquals(0, routefinder.getDfsPathLength());
+        assertEquals(0, routefinder.getDfsStepsTaken());
         assertFalse(routefinder.isDfsFoundPath());
     }
     
@@ -154,9 +158,51 @@ public class RoutefinderTest {
         routefinder.setMap(map);
         routefinder.findStartAndGoal();
         routefinder.findRouteDFS();
-        assertTrue(0 == routefinder.getDfsPathLength());
-        assertTrue(0 == routefinder.getDfsStepsTaken());
+        assertEquals(0, routefinder.getDfsPathLength());
+        assertEquals(0, routefinder.getDfsStepsTaken());
         assertFalse(routefinder.isDfsFoundPath());
+    }
+    
+    @Test
+    public void dijkstraChangesValuesIfPathFound() {
+        char[][] map = {
+            {'S','.','.','.','.','W'},
+            {'.','.','T','W','.','G'},        
+        };
+        char[][] pathMap = {
+            {'S','p','p','p','p','W'},
+            {'.','.','T','W','p','G'},        
+        };
+        routefinder.setMap(map);
+        routefinder.findStartAndGoal();
+        routefinder.findRouteDijkstra();
+        assertEquals(6, routefinder.getDijkstraPathLength());
+        assertTrue(routefinder.isDijkstraFoundPath());
+        assertArrayEquals(pathMap, routefinder.getDijkstraMap());   
+    }
+    
+    @Test
+    public void dijkstraDoesNotSearchIfNoStart() {
+        char[][] map = {
+            {'W','.','.','.','.','W'},
+            {'.','.','W','W','.','G'},        
+        };
+        routefinder.setMap(map);
+        routefinder.findStartAndGoal();
+        assertEquals(0, routefinder.getDfsPathLength());
+        assertFalse(routefinder.isDijkstraFoundPath());
+    }
+    
+    @Test
+    public void dijkstraDoesNotSearchIfNoGoal() {
+        char[][] map = {
+            {'W','S','.','.','.','W'},
+            {'.','.','W','W','.','W'},        
+        };
+        routefinder.setMap(map);
+        routefinder.findStartAndGoal();
+        assertEquals(0, routefinder.getDfsPathLength());
+        assertFalse(routefinder.isDijkstraFoundPath());
     }
     
 }

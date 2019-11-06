@@ -10,6 +10,10 @@ public class Routefinder {
     private int dfsPathLength;
     private int dfsStepsTaken;
     private boolean dfsFoundPath;
+    
+    private char[][] dijkstraMap;
+    private int dijkstraPathLength;
+    private boolean dijkstraFoundPath;
 
     public Routefinder() {
         this.map = null;
@@ -20,6 +24,10 @@ public class Routefinder {
         this.dfsPathLength = 0;
         this.dfsStepsTaken = 0;
         this.dfsFoundPath = false;
+        
+        this.dijkstraMap = null;
+        this.dijkstraPathLength = 0;
+        this.dijkstraFoundPath = false;
 
     }
 
@@ -52,6 +60,19 @@ public class Routefinder {
             this.dfsFoundPath = dfs.isFound();
             this.dfsMap = dfs.getMap();
             this.dfsMap[start.getX()][start.getY()] = 'S';
+        }
+    }
+    
+    public void findRouteDijkstra() {
+        if (start == null || goal == null) {
+            return;
+        }
+        Dijkstra dijkstra = new Dijkstra(map, start, goal);
+        dijkstra.search();
+        if (dijkstra.isFound()) {
+            this.dijkstraPathLength = dijkstra.getPathLength();
+            this.dijkstraFoundPath = dijkstra.isFound();
+            this.dijkstraMap = dijkstra.getMap();
         }
     }
 
@@ -90,5 +111,19 @@ public class Routefinder {
     public boolean isDfsFoundPath() {
         return dfsFoundPath;
     }
+
+    public int getDijkstraPathLength() {
+        return dijkstraPathLength;
+    }
+
+    public boolean isDijkstraFoundPath() {
+        return dijkstraFoundPath;
+    }
+
+    public char[][] getDijkstraMap() {
+        return dijkstraMap;
+    }
+    
+    
 
 }
