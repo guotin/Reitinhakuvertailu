@@ -15,6 +15,7 @@ aputietorakenteenaan kekoa.
 Vertailussa käytettävät verkot tullaan toteuttamaan 2d-taulukoilla.
 
 Kyseiset algoritmit valittiin vertailuun siksi, että ne toimivat kaikki hieman eri tavoin ja ovat silti kaikki yleisesti käytettyjä.
+Vertailuissa ei ole tarkoitus olettaa, että syvyyshaku löytäisi lyhimmän reitin.
 
 ## Tavoitteena olevat aika- ja tilavaativuudet
 
@@ -27,6 +28,14 @@ niin, että algoritmin aikavaativuus olisi pienempää kuin Dijkstran algoritmil
 Ohjelma käyttää pääasiallisena syötteenään valmiiksi muodostettuja testisyötteitä. Näistä käyttäjä voi valita mieleisensä.
 Lisäksi käyttäjältä kysytään minkä algoritmin avulla polku muodostetaan. Ohjelman ideana on lopuksi tulostaa käyttäjälle tietoja muodostetusta polusta, esimerkiksi askelten määrä ja sen löytämiseen käytetty aika.
 
+Valmiina testisyötteinä käytetään Moving AI Lab:in 'Baldurs Gate II' pelin karttoja .map tiedostoina (lähde alla).
+Yksi kartoista näyttää esimerkiksi tältä:
+
+<img src="https://movingai.com/benchmarks/bg512/AR0012SR.png" width="300" height="300" />
+
+Käytettävissä tiedostoissa '@'-merkki kuvaa seinää ja '.'-merkki kuvaa aluetta, jossa voidaan liikkua.
+Karttoihin lisätään manuaalisesti aloituskohtaa kuvaava 'S'-merkki ja päätekohtaa kuvaava 'G'-merkki.
+
 ## Lähteet
 
 - A*-algoritmi: [Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
@@ -36,6 +45,8 @@ Lisäksi käyttäjältä kysytään minkä algoritmin avulla polku muodostetaan.
 - Syvyyshaku: [Wikipedia](https://en.wikipedia.org/wiki/Depth-first_search)
 
 - Tietorakenteet ja algoritmit - Antti Laaksonen - 2.10.2019: [Linkki kirjaan](https://www.cs.helsinki.fi/u/ahslaaks/tirakirja/)
+
+- Testisyötteet: [Moving AI Lab - Baldurs Gate II](https://movingai.com/benchmarks/bg512/index.html)
 
 
 
