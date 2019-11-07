@@ -1,5 +1,8 @@
 package application.domain;
 
+/**
+ * Holds two coordinates, X and Y.
+ */
 public class Position {
     private int x;
     private int y;

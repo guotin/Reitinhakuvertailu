@@ -1,5 +1,10 @@
 package application.domain;
 
+/**
+ * Class used to handle routefinding in a given map.
+ * Stores the original map and all modified maps.
+ * Also stores information about paths.
+ */
 public class Routefinder {
 
     private char[][] map;
@@ -14,7 +19,15 @@ public class Routefinder {
     private char[][] dijkstraMap;
     private int dijkstraPathLength;
     private boolean dijkstraFoundPath;
+    
+    private char[][] astarMap;
+    private int astarPathLength;
+    private boolean astarFoundPath;
 
+    /**
+     * Constuctor for Routefinder.
+     * Initializes all values to null or zero.
+     */
     public Routefinder() {
         this.map = null;
         this.start = null;
@@ -28,17 +41,25 @@ public class Routefinder {
         this.dijkstraMap = null;
         this.dijkstraPathLength = 0;
         this.dijkstraFoundPath = false;
+        
+        this.astarMap = null;
+        this.astarPathLength = 0;
+        this.astarFoundPath = false;
 
     }
-
+    
+    /**
+     * Finds start and end nodes in the original map.
+     * Char 'S' stands for start-node and Char 'G' for goal-node.
+     */
     public void findStartAndGoal() {
-        if (this.map != null) {
+        if (map != null) {
             for (int i = 0; i < map.length; i++) {
                 for (int j = 0; j < map[i].length; j++) {
                     if (map[i][j] == 'S') {
-                        this.start = new Position(i, j);
+                        start = new Position(i, j);
                     } else if (map[i][j] == 'G') {
-                        this.goal = new Position(i, j);
+                        goal = new Position(i, j);
                     }
                     if (start != null && goal != null) {
                         break;
@@ -47,12 +68,33 @@ public class Routefinder {
             }
         }
     }
-
+    
+    /**
+     * Copies a given 2d char array.
+     * Used to create new maps with search algorithms.
+     * @param array is the array to be copied.
+     * @return a new 2d char array.
+     */
+    public char[][] copyArray(char[][] array) {
+        char[][] copy = new char[array.length][array[0].length];
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[0].length; j++) {
+                copy[i][j] = array[i][j];
+            }
+        }
+        return copy;
+    }
+    
+    /**
+     * Calls DepthFirstSearch-class if start and goal are known.
+     * Stores DepthFirstSearch data if search was successful.
+     */
     public void findRouteDFS() {
         if (start == null || goal == null) {
             return;
         }
-        DepthFirstSearch dfs = new DepthFirstSearch(map, start, goal);
+        char[][] mapCopy = copyArray(map);
+        DepthFirstSearch dfs = new DepthFirstSearch(mapCopy, start, goal);
         dfs.search(start.getX(), start.getY());
         if (dfs.isFound()) {
             this.dfsPathLength = dfs.getPathLength();
@@ -63,11 +105,16 @@ public class Routefinder {
         }
     }
     
+    /**
+     * Calls Dijkstra-class if start and goal are known.
+     * Stores Dijkstra data if search was successful.
+     */
     public void findRouteDijkstra() {
         if (start == null || goal == null) {
             return;
         }
-        Dijkstra dijkstra = new Dijkstra(map, start, goal);
+        char[][] mapCopy = copyArray(map);
+        Dijkstra dijkstra = new Dijkstra(mapCopy, start, goal);
         dijkstra.search();
         if (dijkstra.isFound()) {
             this.dijkstraPathLength = dijkstra.getPathLength();
@@ -75,9 +122,23 @@ public class Routefinder {
             this.dijkstraMap = dijkstra.getMap();
         }
     }
-
+    
+    /**
+     * Calls Astar-class if start and goal known.
+     * Stores Astar data if search was successful.
+     */
     public void findRouteAstar() {
-
+        if (start == null || goal == null) {
+            return;
+        }
+        char[][] mapCopy = copyArray(map);
+        Astar astar = new Astar(mapCopy, start, goal);
+        astar.search();
+        if (astar.isFound()) {
+            this.astarPathLength = astar.getPathLength();
+            this.astarFoundPath = astar.isFound();
+            this.astarMap = astar.getMap();
+        }
     }
 
     public Position getStart() {
@@ -123,7 +184,16 @@ public class Routefinder {
     public char[][] getDijkstraMap() {
         return dijkstraMap;
     }
-    
-    
 
+    public char[][] getAstarMap() {
+        return astarMap;
+    }
+
+    public int getAstarPathLength() {
+        return astarPathLength;
+    }
+
+    public boolean isAstarFoundPath() {
+        return astarFoundPath;
+    }
 }

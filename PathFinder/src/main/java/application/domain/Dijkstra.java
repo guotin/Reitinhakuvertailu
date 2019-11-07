@@ -2,6 +2,9 @@ package application.domain;
 
 import java.util.PriorityQueue;
 
+/**
+ * A class that implements Dijkstra's search algorithm.
+ */
 public class Dijkstra {
     
     private char[][] map;
@@ -13,6 +16,13 @@ public class Dijkstra {
     private int pathLength;
     private boolean found;
     
+    /**
+     * Constructor for Dijsktra.
+     * Creates 3 supporting 2d arrays that match the size of the map.
+     * @param map is the map where path is searched.
+     * @param start is the starting position.
+     * @param goal is the goal position.
+     */
     public Dijkstra(char[][] map, Position start, Position goal) {
         this.map = map;
         this.visited = new boolean[map.length][map[0].length];
@@ -24,6 +34,11 @@ public class Dijkstra {
         this.found = false;
     }
     
+    /**
+     * Method that implements Dijkstra's search.
+     * Uses a priorityQueue to find a path.
+     * Draws a path to the original map when search is complete.
+     */
     public void search() {
         initializeMatrixes();
         
@@ -60,6 +75,10 @@ public class Dijkstra {
         }
     }
     
+    /**
+     * Draws the path to the map.
+     * Path is marked with character 'p' from start 'S' to goal 'G'.
+     */
     public void drawPath() {
         Position drawPosition = parents[goal.getX()][goal.getY()];
         while (drawPosition != null) {
@@ -69,6 +88,9 @@ public class Dijkstra {
         map[start.getX()][start.getY()] = 'S';
     }
     
+    /**
+     * Method to initialize supporting 2d arrays.
+     */
     public void initializeMatrixes() {
         for (int i = 0; i < this.map.length; i++) {
             for (int j = 0; j < this.map[0].length; j++) {
@@ -80,6 +102,13 @@ public class Dijkstra {
         distance[start.getX()][start.getY()] = 0;
     }
     
+    /**
+     * Generates neighbouring positions for a given position in a 2d array.
+     * Only positions with character '.' or 'G' are valid moves.
+     * @param position is the position to which neighbours are generated.
+     * @return a position array containing 4 values.
+     * Impossible position value is marked with negative X and Y coordinates.
+     */
     public Position[] generateNeighbours(Position position) {
         Position[] neighbours = new Position[4];
         int x = position.getX();
@@ -121,6 +150,11 @@ public class Dijkstra {
     public char[][] getMap() {
         return map;
     }
+
+    public int[][] getDistance() {
+        return distance;
+    }
+    
     
     
     

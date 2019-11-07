@@ -1,5 +1,8 @@
 package application.domain;
 
+/**
+ * A class that created a pair with A position and its distance. Used with priorityQueue.
+ */
 public class Pair implements Comparable<Pair> {
     private Position position;
     private int distance;
