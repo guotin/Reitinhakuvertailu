@@ -103,7 +103,7 @@ public class DijkstraTest {
     }
     
     @Test
-    public void pathFoundIsShortest() {
+    public void pathFoundIsShortest1() {
         char[][] map = {
             {'W','S','W','W','W','W','W','W','W','W'},
             {'W','.','W','.','.','.','.','.','.','W'},
@@ -124,7 +124,70 @@ public class DijkstraTest {
     }
     
     @Test
-    public void pathDrawIsCorrect() {
+    public void pathFoundIsShortest2() {
+        char[][] map = {
+            {'W','S','W','W','W','W','W','W','W','W'},
+            {'W','.','W','G','.','.','.','.','.','W'},
+            {'W','.','W','@','.','T','@','W','.','W'},
+            {'W','.','W','.','.','W','@','W','.','W'},
+            {'W','.','W','.','T','W','@','W','.','W'},
+            {'W','.','.','.','T','W','W','W','.','W'},
+            {'W','.','W','.','T','W','W','W','.','W'},
+            {'W','.','W','.','.','W','W','W','.','W'},
+            {'W','.','W','T','.','.','@','.','.','W'},
+            {'W','.','.','.','.','W','W','W','.','W'},    
+        };
+        Position start = new Position(0,1);
+        Position goal = new Position(1,3);
+        dijkstra = new Dijkstra(map, start, goal);
+        dijkstra.search();
+        assertEquals(13, dijkstra.getPathLength());
+    }
+    
+    @Test
+    public void pathFoundIsShortest3() {
+        char[][] map = {
+            {'W','S','W','W','W','W','W','W','W','W'},
+            {'W','.','.','.','.','.','.','.','.','W'},
+            {'W','.','W','@','.','T','@','W','.','W'},
+            {'W','.','W','.','.','W','@','W','.','W'},
+            {'W','.','W','.','.','W','@','W','.','W'},
+            {'W','.','@','.','.','W','W','W','.','W'},
+            {'W','.','W','.','.','W','W','W','.','W'},
+            {'W','.','W','.','.','W','W','W','.','W'},
+            {'W','.','W','T','.','.','@','.','.','W'},
+            {'W','.','.','G','.','W','W','W','.','W'},    
+        };
+        Position start = new Position(0,1);
+        Position goal = new Position(9,3);
+        dijkstra = new Dijkstra(map, start, goal);
+        dijkstra.search();
+        assertEquals(11, dijkstra.getPathLength());
+    }
+    
+    @Test
+    public void pathFoundIsShortest4() {
+        char[][] map = {
+            {'W','S','W','W','W','W','W','W','W','W'},
+            {'W','.','.','.','.','.','.','.','.','W'},
+            {'W','.','W','@','.','T','@','W','.','W'},
+            {'W','.','W','.','.','W','@','W','.','W'},
+            {'W','.','W','.','.','W','@','W','.','W'},
+            {'W','.','@','.','.','W','W','W','.','W'},
+            {'W','.','W','.','.','W','W','W','.','G'},
+            {'W','.','W','.','.','W','W','W','.','W'},
+            {'W','.','W','T','.','.','.','.','.','@'},
+            {'W','.','.','.','.','W','W','W','.','W'},    
+        };
+        Position start = new Position(0,1);
+        Position goal = new Position(6,9);
+        dijkstra = new Dijkstra(map, start, goal);
+        dijkstra.search();
+        assertEquals(14, dijkstra.getPathLength());
+    }
+    
+    @Test
+    public void pathDrawIsCorrect1() {
         char[][] map = {
             {'S','.','.','.','.','@'},
             {'.','.','T','T','.','G'},        
@@ -135,6 +198,39 @@ public class DijkstraTest {
         };
         Position start = new Position(0,0);
         Position goal = new Position(1,5);
+        dijkstra = new Dijkstra(map, start, goal);
+        dijkstra.search();
+        assertArrayEquals(pathMap, dijkstra.getMap());
+    }
+    
+    @Test
+    public void pathDrawIsCorrect2() {
+        char[][] map = {
+            {'W','S','W','W','W','W','W','W','W','W'},
+            {'W','.','W','.','.','@','.','.','.','W'},
+            {'W','.','W','@','.','T','@','W','.','W'},
+            {'W','.','W','.','.','W','@','W','.','W'},
+            {'W','.','W','.','T','W','@','W','.','W'},
+            {'W','.','.','.','T','W','W','W','.','W'},
+            {'W','.','W','.','T','W','W','W','.','W'},
+            {'W','.','W','.','.','W','W','W','.','W'},
+            {'W','.','W','T','.','.','G','.','.','W'},
+            {'W','.','.','.','.','W','W','W','.','W'},    
+        };
+        char[][] pathMap = {
+            {'W','S','W','W','W','W','W','W','W','W'},
+            {'W','p','W','.','.','@','.','.','.','W'},
+            {'W','p','W','@','.','T','@','W','.','W'},
+            {'W','p','W','.','.','W','@','W','.','W'},
+            {'W','p','W','.','T','W','@','W','.','W'},
+            {'W','p','p','p','T','W','W','W','.','W'},
+            {'W','.','W','p','T','W','W','W','.','W'},
+            {'W','.','W','p','p','W','W','W','.','W'},
+            {'W','.','W','T','p','p','G','.','.','W'},
+            {'W','.','.','.','.','W','W','W','.','W'},    
+        };
+        Position start = new Position(0,1);
+        Position goal = new Position(8,6);
         dijkstra = new Dijkstra(map, start, goal);
         dijkstra.search();
         assertArrayEquals(pathMap, dijkstra.getMap());

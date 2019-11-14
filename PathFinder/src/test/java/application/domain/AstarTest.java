@@ -103,10 +103,31 @@ public class AstarTest {
     }
     
     @Test
-    public void pathFoundIsShortest() {
+    public void pathFoundIsShortest1() {
         char[][] map = {
             {'W','S','W','W','W','W','W','W','W','W'},
-            {'W','.','W','.','.','G','.','.','.','W'},
+            {'W','.','W','.','.','@','.','.','.','W'},
+            {'W','.','W','@','.','T','@','W','.','W'},
+            {'W','.','W','.','.','W','@','W','.','W'},
+            {'W','.','W','.','T','W','@','W','.','W'},
+            {'W','.','.','.','T','W','W','W','.','W'},
+            {'W','.','W','.','T','W','W','W','.','W'},
+            {'W','.','W','.','.','W','W','W','.','W'},
+            {'W','.','W','T','.','.','G','.','.','W'},
+            {'W','.','.','.','.','W','W','W','.','W'},    
+        };
+        Position start = new Position(0,1);
+        Position goal = new Position(8,6);
+        astar = new Astar(map, start, goal);
+        astar.search();
+        assertEquals(13, astar.getPathLength());
+    }
+    
+    @Test
+    public void pathFoundIsShortest2() {
+        char[][] map = {
+            {'W','S','W','W','W','W','W','W','W','W'},
+            {'W','.','W','G','.','.','.','.','.','W'},
             {'W','.','W','@','.','T','@','W','.','W'},
             {'W','.','W','.','.','W','@','W','.','W'},
             {'W','.','W','.','T','W','@','W','.','W'},
@@ -117,14 +138,89 @@ public class AstarTest {
             {'W','.','.','.','.','W','W','W','.','W'},    
         };
         Position start = new Position(0,1);
-        Position goal = new Position(1,5);
+        Position goal = new Position(1,3);
         astar = new Astar(map, start, goal);
         astar.search();
         assertEquals(13, astar.getPathLength());
     }
     
     @Test
-    public void pathDrawIsCorrect() {
+    public void pathFoundIsShortest3() {
+        char[][] map = {
+            {'W','S','W','W','W','W','W','W','W','W'},
+            {'W','.','.','.','.','.','.','.','.','W'},
+            {'W','.','W','@','.','T','@','W','.','W'},
+            {'W','.','W','.','.','W','@','W','.','W'},
+            {'W','.','W','.','.','W','@','W','.','W'},
+            {'W','.','@','.','.','W','W','W','.','W'},
+            {'W','.','W','.','.','W','W','W','.','W'},
+            {'W','.','W','.','.','W','W','W','.','W'},
+            {'W','.','W','T','.','.','@','.','.','W'},
+            {'W','.','.','G','.','W','W','W','.','W'},    
+        };
+        Position start = new Position(0,1);
+        Position goal = new Position(9,3);
+        astar = new Astar(map, start, goal);
+        astar.search();
+        assertEquals(11, astar.getPathLength());
+    }
+    
+    @Test
+    public void pathFoundIsShortest4() {
+        char[][] map = {
+            {'W','S','W','W','W','W','W','W','W','W'},
+            {'W','.','.','.','.','.','.','.','.','W'},
+            {'W','.','W','@','.','T','@','W','.','W'},
+            {'W','.','W','.','.','W','@','W','.','W'},
+            {'W','.','W','.','.','W','@','W','.','W'},
+            {'W','.','@','.','.','W','W','W','.','W'},
+            {'W','.','W','.','.','W','W','W','.','G'},
+            {'W','.','W','.','.','W','W','W','.','W'},
+            {'W','.','W','T','.','.','.','.','.','@'},
+            {'W','.','.','.','.','W','W','W','.','W'},    
+        };
+        Position start = new Position(0,1);
+        Position goal = new Position(6,9);
+        astar = new Astar(map, start, goal);
+        astar.search();
+        assertEquals(14, astar.getPathLength());
+    }
+    
+    @Test
+    public void pathDrawIsCorrect1() {
+        char[][] map = {
+            {'W','S','W','W','W','W','W','W','W','W'},
+            {'W','.','W','.','.','@','.','.','.','W'},
+            {'W','.','W','@','.','T','@','W','.','W'},
+            {'W','.','W','.','.','W','@','W','.','W'},
+            {'W','.','W','.','T','W','@','W','.','W'},
+            {'W','.','.','.','T','W','W','W','.','W'},
+            {'W','.','W','.','T','W','W','W','.','W'},
+            {'W','.','W','.','.','W','W','W','.','W'},
+            {'W','.','W','T','.','.','G','.','.','W'},
+            {'W','.','.','.','.','W','W','W','.','W'},    
+        };
+        char[][] pathMap = {
+            {'W','S','W','W','W','W','W','W','W','W'},
+            {'W','p','W','.','.','@','.','.','.','W'},
+            {'W','p','W','@','.','T','@','W','.','W'},
+            {'W','p','W','.','.','W','@','W','.','W'},
+            {'W','p','W','.','T','W','@','W','.','W'},
+            {'W','p','p','p','T','W','W','W','.','W'},
+            {'W','.','W','p','T','W','W','W','.','W'},
+            {'W','.','W','p','p','W','W','W','.','W'},
+            {'W','.','W','T','p','p','G','.','.','W'},
+            {'W','.','.','.','.','W','W','W','.','W'},    
+        };
+        Position start = new Position(0,1);
+        Position goal = new Position(8,6);
+        astar = new Astar(map, start, goal);
+        astar.search();
+        assertArrayEquals(pathMap, astar.getMap());
+    }
+    
+    @Test
+    public void pathDrawIsCorrect2() {
         char[][] map = {
             {'W','S','W','W','W','W','W','W','W','W'},
             {'W','.','W','.','.','G','.','.','.','W'},

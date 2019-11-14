@@ -1,6 +1,6 @@
 package application.domain;
 
-import java.util.PriorityQueue;
+//import java.util.PriorityQueue;
 
 /**
  * A class that implements Astar-search-algorithm.
@@ -43,11 +43,11 @@ public class Astar {
     public void search() {
         initializeMatrixes();
         
-        PriorityQueue<Pair> priorityQueue = new PriorityQueue<>();
+        PriorityQueue priorityQueue = new PriorityQueue();
         priorityQueue.add(new Pair(start, 0));
         
         while (!priorityQueue.isEmpty()) {
-            Position currentPosition = priorityQueue.poll().getPosition();
+            Position currentPosition = priorityQueue.remove().getPosition();
             int currentX = currentPosition.getX();
             int currentY = currentPosition.getY();
             
@@ -64,7 +64,6 @@ public class Astar {
                 int newDistance = distance[currentX][currentY] + 1;
                 if (newDistance < currentDistance) {
                     int distanceToGoal = Math.abs(currentX - goal.getX()) + Math.abs(currentY - goal.getY());
-                    System.out.println(distanceToGoal);
                     distance[neighbour.getX()][neighbour.getY()] = newDistance;
                     priorityQueue.add(new Pair(neighbour, newDistance + distanceToGoal));
                     parents[neighbour.getX()][neighbour.getY()] = new Position(currentX, currentY);

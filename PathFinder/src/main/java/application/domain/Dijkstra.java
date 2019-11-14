@@ -1,7 +1,5 @@
 package application.domain;
 
-import java.util.PriorityQueue;
-
 /**
  * A class that implements Dijkstra's search algorithm.
  */
@@ -41,12 +39,12 @@ public class Dijkstra {
      */
     public void search() {
         initializeMatrixes();
-        
-        PriorityQueue<Pair> priorityQueue = new PriorityQueue<>();
+       
+        PriorityQueue priorityQueue = new PriorityQueue();
         priorityQueue.add(new Pair(start, 0));
         
         while (!priorityQueue.isEmpty()) {
-            Position currentPosition = priorityQueue.poll().getPosition();
+            Position currentPosition = priorityQueue.remove().getPosition();
             int currentX = currentPosition.getX();
             int currentY = currentPosition.getY();
             
@@ -54,6 +52,7 @@ public class Dijkstra {
                 continue;
             }
             visited[currentX][currentY] = true;
+            if (visited[goal.getX()][goal.getY()]) break;
             
             for (Position neighbour : generateNeighbours(currentPosition)) {
                 if (neighbour.getX() == -1 || neighbour.getY() == -1) {
@@ -153,9 +152,5 @@ public class Dijkstra {
 
     public int[][] getDistance() {
         return distance;
-    }
-    
-    
-    
-    
+    }  
 }

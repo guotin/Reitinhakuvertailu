@@ -25,7 +25,7 @@ public class Routefinder {
     private boolean astarFoundPath;
 
     /**
-     * Constuctor for Routefinder.
+     * Constructor for Routefinder.
      * Initializes all values to null or zero.
      */
     public Routefinder() {
