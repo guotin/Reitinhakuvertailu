@@ -14,6 +14,8 @@ Helsingin yliopiston Aineopintojen harjoitustyö: Tietorakenteet ja algoritmit -
 
 [Viikko 2](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/viikkoraportit/viikko_2.md)
 
+[Viikko 3](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/viikkoraportit/viikko_3.md)
+
 ## Komentorivitoiminnot
 
 ### Testaus
