@@ -1,13 +1,20 @@
 package application.ui;
 
 import application.domain.Filereader;
+import application.domain.Position;
 import application.domain.Routefinder;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -20,57 +27,166 @@ public class AppUI extends Application {
     private Canvas canvas;
     private GraphicsContext gc;
     private char[][] currentMap;
-    private boolean map1;
+    private Position start;
+    private Position goal;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //Init canvas and draw file 'map1.map'
         reader = new Filereader();
         route = new Routefinder();
         loadMap("map1.map");
-        map1 = true;
         initCanvas();
         drawMap();
+        
+        //Gridpane for buttons
         GridPane buttonGrid = new GridPane();
-        Button button1 = new Button("Solve");
-        Button button2 = new Button("Change Map");
-        buttonGrid.add(button1, 0, 0);
-        buttonGrid.add(button2, 1, 0);
+        buttonGrid.setPadding(new Insets(20, 20, 20, 20));
+        
+        //Main functionality buttons
+        Label mapSelectionLabel = new Label("Current map: map1.map");
+        Button button1 = new Button("Change Map");
+        Button button2 = new Button("Solve with Astar");
+        Button button3 = new Button("Solve with DFS");
+        Button button4 = new Button("Solve with Dijkstra");
+        
+        //Start and goal selection
+        RadioButton startSelection = new RadioButton("Start");
+        RadioButton goalSelection = new RadioButton("Goal");
+        ToggleGroup group = new ToggleGroup();
+        startSelection.setToggleGroup(group);
+        goalSelection.setToggleGroup(group);
+        startSelection.setSelected(true);
+        
+        Label startPosition = new Label("Not yet selected");
+        Label goalPosition = new Label("Not yet selected");
+        
+        //Statistics
+        TextArea statistics = new TextArea();
+        statistics.setMaxSize(400, 400);
+        statistics.setEditable(false);
+        
+        //List of maps available
+        ListView mapList = new ListView();
+        for (int i = 1; i < 12; i++) {
+            mapList.getItems().add("map" + i + ".map");
+        }
+        mapList.setMaxSize(200, 200);
+        
+        //Interface layout
+        buttonGrid.add(new Label("List of available maps"), 0, 0);
+        buttonGrid.add(mapSelectionLabel, 1, 0);
+        buttonGrid.add(mapList, 0, 1);
+        buttonGrid.add(button1, 1, 1);
+        buttonGrid.add(new Label("Point selection:"), 1, 2);
+        buttonGrid.add(new Label("Start position: "), 1, 3);
+        buttonGrid.add(startPosition, 2, 3);
+        buttonGrid.add(new Label("Goal position: "), 1, 4);
+        buttonGrid.add(goalPosition, 2, 4);
+        buttonGrid.add(startSelection, 2, 2);
+        buttonGrid.add(goalSelection, 3, 2);
+        buttonGrid.add(button2, 2, 1);
+        buttonGrid.add(button3, 3, 1);
+        buttonGrid.add(button4, 4, 1);
+        buttonGrid.add(new Label("Statistics"), 5, 0);
+        buttonGrid.add(statistics, 5, 1);
+        
+        //Map change button functionality
+        button1.setOnAction((event) -> {
+            try {
+                String selection = mapList.getFocusModel().getFocusedItem().toString();
+                mapSelectionLabel.setText("Current map: " + selection);
+                loadMap(selection);
+                drawMap();
+                statistics.setText("");
+                startPosition.setText("Not yet selected");
+                goalPosition.setText("Not yet selected");
+                start = null;
+                goal = null;
+            } catch (NullPointerException e) {
+            }
+        });
+        
+        //Astar button functionality
+        button2.setOnAction((event) -> {
+            findRouteAstar();
+            drawMap();
+            boolean found = route.isAstarFoundPath();
+            if (found) {
+                int pathLength = route.getAstarPathLength();
+                statistics.setText("Tried to find path with A* algorithm \n \n"
+                        + "Path was found! \n"
+                        + "Path length: " + pathLength);
+            } else {
+                statistics.setText("Tried to find path with A* algorithm \n \n"
+                        + "Path was not found. \n");
+            }
+        });
+        
+        //Dfs button functionality
+        button3.setOnAction((event) -> {
+            findRouteDFS();
+            drawMap();
+            boolean found = route.isDfsFoundPath();
+            if (found) {
+                int pathLength = route.getDfsPathLength();
+                statistics.setText("Tried to find path with Depth-first-search \n \n"
+                        + "Path was found! \n"
+                        + "Path length: " + pathLength);
+            } else {
+                statistics.setText("Tried to find path with Depth-first-search \n \n"
+                        + "Path was not found. \n");
+            }
+        });
+        
+        //Dijkstra button functionality
+        button4.setOnAction((event) -> {
+            findRouteDijkstra();
+            drawMap();
+            boolean found = route.isDijkstraFoundPath();
+            if (found) {
+                int pathLength = route.getDijkstraPathLength();
+                statistics.setText("Tried to find path with Dijkstra's algorithm \n \n"
+                        + "Path was found! \n"
+                        + "Path length: " + pathLength);
+            } else {
+                statistics.setText("Tried to find path with Dijkstra's algorithm \n \n"
+                        + "Path was not found. \n");
+            }
+        });
+        
+        //Canvas click to set start or goal
+        canvas.setOnMouseClicked((event) -> {
+            RadioButton selected = (RadioButton) group.getSelectedToggle();
+            if (selected.getText().equals("Start")) {
+                start = new Position( (int) event.getX() / 4, (int) event.getY() / 4);
+                startPosition.setText(start.toString());
+            } else {
+                goal = new Position( (int) event.getX() / 4, (int) event.getY() / 4); 
+                goalPosition.setText(goal.toString());
+            }
+        });
+        
+        //Display everything
         ScrollPane scrollPane = new ScrollPane(canvas);
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(scrollPane);
         borderPane.setBottom(buttonGrid);
-
-        button1.setOnAction((event) -> {
-            findRoute();
-            drawMap();
-        });
-        
-        button2.setOnAction((event) -> {
-            if (map1) {
-                loadMap("map2.map");
-            } else {
-               loadMap("map1.map"); 
-            }
-            drawMap();
-            map1 = !map1;
-            
-        });
-
-        borderPane.setPrefSize(1024, 720);
+        borderPane.setPrefSize(1280, 720);
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
     
     private void initCanvas() {
-        canvas = new Canvas(1024, 1024);
+        canvas = new Canvas(2048, 2048);
         gc = canvas.getGraphicsContext2D();
         gc.setFill(Color.BLACK);
-        gc.fillRect(0, 0, 1024, 1024);
+        gc.fillRect(0, 0, 2048, 2048);
     }
 
     private void drawMap() {
-        gc.scale(2, 2);
+        gc.scale(4, 4);
         for (int i = 0; i < currentMap.length; i++) {
             for (int j = 0; j < currentMap[0].length; j++) {
                 if (currentMap[i][j] == '.') {
@@ -87,11 +203,25 @@ public class AppUI extends Application {
                 gc.fillRect(i, j, 1, 1);
             }
         }
-        gc.scale(0.5, 0.5);
+        gc.scale(0.25, 0.25);
 
     }
 
-    private void findRoute() {
+    private void findRouteDijkstra() {
+        route.setMap(currentMap);
+        route.findStartAndGoal();
+        route.findRouteDijkstra();
+        currentMap = route.copyArray(route.getDijkstraMap());
+    }
+
+    private void findRouteDFS() {
+        route.setMap(currentMap);
+        route.findStartAndGoal();
+        route.findRouteDFS();
+        currentMap = route.copyArray(route.getDfsMap());
+    }
+
+    private void findRouteAstar() {
         route.setMap(currentMap);
         route.findStartAndGoal();
         route.findRouteAstar();
