@@ -10,6 +10,8 @@ public class Routefinder {
     private char[][] map;
     private Position start;
     private Position goal;
+    private char startReplaceHolder;
+    private char goalReplaceHolder;
 
     private char[][] dfsMap;
     private int dfsPathLength;
@@ -32,6 +34,8 @@ public class Routefinder {
         this.map = null;
         this.start = null;
         this.goal = null;
+        this.startReplaceHolder = 'H';
+        this.goalReplaceHolder = 'H';
 
         this.dfsMap = null;
         this.dfsPathLength = 0;
@@ -140,6 +144,25 @@ public class Routefinder {
             this.astarMap = astar.getMap();
         }
     }
+
+    public void setGoal(Position goal) {
+        if (goalReplaceHolder != 'H') {
+            map[this.goal.getX()][this.goal.getY()] = goalReplaceHolder;
+        }
+        goalReplaceHolder = map[goal.getX()][goal.getY()];
+        map[goal.getX()][goal.getY()] = 'G';
+        this.goal = goal;
+    }
+
+    public void setStart(Position start) {
+        if (startReplaceHolder != 'H') {
+            map[this.start.getX()][this.start.getY()] = startReplaceHolder;
+        }
+        startReplaceHolder = map[start.getX()][start.getY()];
+        map[start.getX()][start.getY()] = 'S';
+        this.start = start;
+    }
+    
 
     public Position getStart() {
         return start;
