@@ -1,4 +1,6 @@
-package application.domain;
+package application.algorithms;
+
+import application.datastructures.Position;
 
 import org.junit.After;
 import org.junit.AfterClass;

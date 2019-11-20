@@ -1,5 +1,4 @@
-
-package application.domain;
+package application.datastructures;
 
 import org.junit.After;
 import org.junit.AfterClass;

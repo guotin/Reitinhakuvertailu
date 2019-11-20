@@ -1,4 +1,4 @@
-package application.domain;
+package application.datastructures;
 
 /**
  * Class for priorityqueue implementation with binary heap. Can only be used

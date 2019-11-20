@@ -1,5 +1,7 @@
 
-package application.domain;
+package application.algorithms;
+
+import application.datastructures.Position;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -26,7 +28,7 @@ public class DepthFirstSearchTest {
         Position start = new Position(2,5);
         Position goal = new Position(5,5);
         dfs = new DepthFirstSearch(map, start, goal);
-        dfs.search(start.getX(), start.getY());
+        dfs.search();
         assertTrue(dfs.isFound());
     }
     
@@ -39,7 +41,7 @@ public class DepthFirstSearchTest {
         Position start = new Position(0,0);
         Position goal = new Position(1,5);
         dfs = new DepthFirstSearch(map, start, goal);
-        dfs.search(start.getX(), start.getY());
+        dfs.search();
         assertTrue(dfs.isFound());
     }
     
@@ -61,7 +63,7 @@ public class DepthFirstSearchTest {
         Position start = new Position(0,1);
         Position goal = new Position(8,6);
         dfs = new DepthFirstSearch(map, start, goal);
-        dfs.search(start.getX(), start.getY());
+        dfs.search();
         assertTrue(dfs.isFound());
     }
     
@@ -78,6 +80,7 @@ public class DepthFirstSearchTest {
         Position start = new Position(2,5);
         Position goal = new Position(5,5);
         dfs = new DepthFirstSearch(map, start, goal);
+        dfs.search();
         assertFalse(dfs.isFound());
     }
     
@@ -90,6 +93,7 @@ public class DepthFirstSearchTest {
         Position start = new Position(0,0);
         Position goal = new Position(1,5);
         dfs = new DepthFirstSearch(map, start, goal);
+        dfs.search();
         assertFalse(dfs.isFound());
     }
     
@@ -111,6 +115,7 @@ public class DepthFirstSearchTest {
         Position start = new Position(0,1);
         Position goal = new Position(8,6);
         dfs = new DepthFirstSearch(map, start, goal);
+        dfs.search();
         assertFalse(dfs.isFound());
     }
     

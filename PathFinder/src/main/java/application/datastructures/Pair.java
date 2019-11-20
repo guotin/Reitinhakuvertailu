@@ -1,4 +1,4 @@
-package application.domain;
+package application.datastructures;
 
 /**
  * A class that created a pair with A position and its distance. Used with priorityQueue.

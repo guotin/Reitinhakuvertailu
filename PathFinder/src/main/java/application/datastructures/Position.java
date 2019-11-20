@@ -1,4 +1,4 @@
-package application.domain;
+package application.datastructures;
 
 /**
  * Holds two coordinates, X and Y.

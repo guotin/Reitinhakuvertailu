@@ -1,7 +1,7 @@
 package application.ui;
 
 import application.domain.Filereader;
-import application.domain.Position;
+import application.datastructures.Position;
 import application.domain.Routefinder;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -114,9 +114,11 @@ public class AppUI extends Application {
             boolean found = route.isAstarFoundPath();
             if (found) {
                 int pathLength = route.getAstarPathLength();
+                int steps = route.getAstarStepsTaken();
                 statistics.setText("Tried to find path with A* algorithm \n \n"
                         + "Path was found! \n"
-                        + "Path length: " + pathLength);
+                        + "Path length: " + pathLength + "\n"
+                        + "Steps taken (visited nodes): " + steps);
             } else {
                 statistics.setText("Tried to find path with A* algorithm \n \n"
                         + "Path was not found. \n");
@@ -130,9 +132,11 @@ public class AppUI extends Application {
             boolean found = route.isDfsFoundPath();
             if (found) {
                 int pathLength = route.getDfsPathLength();
+                int steps = route.getDfsStepsTaken();
                 statistics.setText("Tried to find path with Depth-first-search \n \n"
                         + "Path was found! \n"
-                        + "Path length: " + pathLength);
+                        + "Path length: " + pathLength + "\n"
+                        + "Steps taken (visited nodes): " + steps);
             } else {
                 statistics.setText("Tried to find path with Depth-first-search \n \n"
                         + "Path was not found. \n");
@@ -146,9 +150,11 @@ public class AppUI extends Application {
             boolean found = route.isDijkstraFoundPath();
             if (found) {
                 int pathLength = route.getDijkstraPathLength();
+                int steps = route.getDijkstraStepsTaken();
                 statistics.setText("Tried to find path with Dijkstra's algorithm \n \n"
                         + "Path was found! \n"
-                        + "Path length: " + pathLength);
+                        + "Path length: " + pathLength + "\n"
+                        + "Steps taken (visited nodes): " + steps);
             } else {
                 statistics.setText("Tried to find path with Dijkstra's algorithm \n \n"
                         + "Path was not found. \n");

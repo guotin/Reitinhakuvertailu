@@ -1,5 +1,10 @@
 package application.domain;
 
+import application.datastructures.Position;
+import application.algorithms.Astar;
+import application.algorithms.DepthFirstSearch;
+import application.algorithms.Dijkstra;
+
 /**
  * Class used to handle routefinding in a given map.
  * Stores the original map and all modified maps.
@@ -20,10 +25,12 @@ public class Routefinder {
     
     private char[][] dijkstraMap;
     private int dijkstraPathLength;
+    private int dijkstraStepsTaken;
     private boolean dijkstraFoundPath;
     
     private char[][] astarMap;
     private int astarPathLength;
+    private int astarStepsTaken;
     private boolean astarFoundPath;
 
     /**
@@ -44,10 +51,12 @@ public class Routefinder {
         
         this.dijkstraMap = null;
         this.dijkstraPathLength = 0;
+        this.dijkstraStepsTaken = 0;
         this.dijkstraFoundPath = false;
         
         this.astarMap = null;
         this.astarPathLength = 0;
+        this.astarStepsTaken = 0;
         this.astarFoundPath = false;
 
     }
@@ -99,13 +108,12 @@ public class Routefinder {
         }
         char[][] mapCopy = copyArray(map);
         DepthFirstSearch dfs = new DepthFirstSearch(mapCopy, start, goal);
-        dfs.search(start.getX(), start.getY());
+        dfs.search();
         if (dfs.isFound()) {
             this.dfsPathLength = dfs.getPathLength();
             this.dfsStepsTaken = dfs.getStepsTaken();
             this.dfsFoundPath = dfs.isFound();
             this.dfsMap = dfs.getMap();
-            this.dfsMap[start.getX()][start.getY()] = 'S';
         }
     }
     
@@ -122,6 +130,7 @@ public class Routefinder {
         dijkstra.search();
         if (dijkstra.isFound()) {
             this.dijkstraPathLength = dijkstra.getPathLength();
+            this.dijkstraStepsTaken = dijkstra.getStepsTaken();
             this.dijkstraFoundPath = dijkstra.isFound();
             this.dijkstraMap = dijkstra.getMap();
         }
@@ -140,22 +149,33 @@ public class Routefinder {
         astar.search();
         if (astar.isFound()) {
             this.astarPathLength = astar.getPathLength();
+            this.astarStepsTaken = astar.getStepsTaken();
             this.astarFoundPath = astar.isFound();
             this.astarMap = astar.getMap();
         }
     }
-
+    
+    /**
+     * Sets the goal position and draws a character 'G' to map.
+     * Stores real map character to draw original map when goal is changed.
+     * @param goal is the new goal position.
+     */
     public void setGoal(Position goal) {
-        if (goalReplaceHolder != 'H') {
+        if (goalReplaceHolder != 'H' && this.goal != null) {
             map[this.goal.getX()][this.goal.getY()] = goalReplaceHolder;
         }
         goalReplaceHolder = map[goal.getX()][goal.getY()];
         map[goal.getX()][goal.getY()] = 'G';
         this.goal = goal;
     }
-
+    
+    /**
+     * Sets the start position and draws a character 'S' to map.
+     * Stores real map character to draw original map when start is changed.
+     * @param start is the new start position.
+     */
     public void setStart(Position start) {
-        if (startReplaceHolder != 'H') {
+        if (startReplaceHolder != 'H' && this.start != null) {
             map[this.start.getX()][this.start.getY()] = startReplaceHolder;
         }
         startReplaceHolder = map[start.getX()][start.getY()];
@@ -173,6 +193,11 @@ public class Routefinder {
     }
 
     public void setMap(char[][] map) {
+        this.astarFoundPath = false;
+        this.dijkstraFoundPath = false;
+        this.dfsFoundPath = false;
+        this.goal = null;
+        this.start = null;
         this.map = map;
     }
 
@@ -200,6 +225,10 @@ public class Routefinder {
         return dijkstraPathLength;
     }
 
+    public int getDijkstraStepsTaken() {
+        return dijkstraStepsTaken;
+    }
+    
     public boolean isDijkstraFoundPath() {
         return dijkstraFoundPath;
     }
@@ -215,6 +244,10 @@ public class Routefinder {
     public int getAstarPathLength() {
         return astarPathLength;
     }
+
+    public int getAstarStepsTaken() {
+        return astarStepsTaken;
+    }  
 
     public boolean isAstarFoundPath() {
         return astarFoundPath;
