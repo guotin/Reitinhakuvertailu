@@ -1,5 +1,7 @@
 package application.domain;
 
+import application.datastructures.Position;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -255,6 +257,72 @@ public class RoutefinderTest {
         routefinder.findRouteAstar();
         assertEquals(0, routefinder.getDfsPathLength());
         assertFalse(routefinder.isDijkstraFoundPath());
+    }
+    
+    @Test
+    public void settingNewStartReplacesOther() {
+        char[][] map = {
+            {'T','.','.','.','.','W'},
+            {'T','.','W','@','.','W'},
+            {'W','.','W','@','.','.'},
+            {'W','.','T','W','.','W'},
+            {'W','.','.','W','W','W'},
+            {'W','W','.','.','.','G'},
+        };
+        routefinder.setMap(map);
+        routefinder.setStart(new Position(2,5));
+        char[][] newMap = {
+            {'T','.','.','.','.','W'},
+            {'T','.','W','@','.','W'},
+            {'W','.','W','@','.','S'},
+            {'W','.','T','W','.','W'},
+            {'W','.','.','W','W','W'},
+            {'W','W','.','.','.','G'},
+        };
+        assertArrayEquals(routefinder.getMap(), newMap);
+        routefinder.setStart(new Position(0,1));
+        char[][] newMap2 = {
+            {'T','S','.','.','.','W'},
+            {'T','.','W','@','.','W'},
+            {'W','.','W','@','.','.'},
+            {'W','.','T','W','.','W'},
+            {'W','.','.','W','W','W'},
+            {'W','W','.','.','.','G'},
+        };
+        assertArrayEquals(routefinder.getMap(), newMap2);
+    }
+    
+    @Test
+    public void settingNewGoalReplacesOther() {
+        char[][] map = {
+            {'T','.','.','.','.','W'},
+            {'T','.','W','@','.','W'},
+            {'W','.','W','@','.','S'},
+            {'W','.','T','W','.','W'},
+            {'W','.','.','W','W','W'},
+            {'W','W','.','.','.','W'},
+        };
+        routefinder.setMap(map);
+        routefinder.setGoal(new Position(4,1));
+        char[][] newMap = {
+            {'T','.','.','.','.','W'},
+            {'T','.','W','@','.','W'},
+            {'W','.','W','@','.','S'},
+            {'W','.','T','W','.','W'},
+            {'W','G','.','W','W','W'},
+            {'W','W','.','.','.','W'},
+        };
+        assertArrayEquals(routefinder.getMap(), newMap);
+        routefinder.setGoal(new Position(4,2));
+        char[][] newMap2 = {
+            {'T','.','.','.','.','W'},
+            {'T','.','W','@','.','W'},
+            {'W','.','W','@','.','S'},
+            {'W','.','T','W','.','W'},
+            {'W','.','G','W','W','W'},
+            {'W','W','.','.','.','W'},
+        };
+        assertArrayEquals(routefinder.getMap(), newMap2);
     }
     
     

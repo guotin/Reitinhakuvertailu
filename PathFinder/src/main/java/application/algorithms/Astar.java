@@ -3,6 +3,7 @@ package application.algorithms;
 import application.datastructures.Position;
 import application.datastructures.Pair;
 import application.datastructures.PriorityQueue;
+
 /**
  * A class that implements Astar-search-algorithm.
  */
@@ -21,7 +22,8 @@ public class Astar {
     
     /**
      * Constructor for Astar.
-     * Creates 3 supporting 2d arrays that match the size of the map. 
+     * Creates 3 supporting 2d arrays that match the size of the map.
+     * Also creates a new Helper-class object.
      * @param map is the map where path is searched.
      * @param start is the starting position.
      * @param goal is the goal position.
@@ -43,44 +45,49 @@ public class Astar {
      * Method that implements Astar search.
      * Uses a priorityQueue to find a path.
      * Used heuristic is 'Manhattan distance' between two points.
-     * Draws a path to the original map when search is complete.
+     * Draws the path and gets path length by calling Helper-class.
      */
     public void search() {
-        initializeMatrixes();
-        
+        initializeMatrixes();      
         PriorityQueue priorityQueue = new PriorityQueue();
         priorityQueue.add(new Pair(start, 0));
         
         while (!priorityQueue.isEmpty()) {
-            Position currentPosition = priorityQueue.remove().getPosition();
-            int currentX = currentPosition.getX();
-            int currentY = currentPosition.getY();
-            
-            if (visited[currentX][currentY]) {
+            Position currentPosition = priorityQueue.remove().getPosition();        
+            if (visited[currentPosition.getX()][currentPosition.getY()]) {
                 continue;
+            }          
+            visited[currentPosition.getX()][currentPosition.getY()] = true;
+            if (visited[goal.getX()][goal.getY()]) {
+                break;
             }
-            visited[currentX][currentY] = true;
-            if (visited[goal.getX()][goal.getY()]) break;
-            stepsTaken++;
+            stepsTaken++;          
             for (Position neighbour : helper.generateNeighbours(currentPosition)) {
                 if (neighbour.getX() == -1 || neighbour.getY() == -1) {
                     continue;
                 }
                 int currentDistance = distance[neighbour.getX()][neighbour.getY()];
-                int newDistance = distance[currentX][currentY] + 1;
+                int distanceToGoal = heuristic(currentPosition);
+                int newDistance = distance[currentPosition.getX()][currentPosition.getY()] + 1 + distanceToGoal;
                 if (newDistance < currentDistance) {
-                    int distanceToGoal = Math.abs(currentX - goal.getX()) + Math.abs(currentY - goal.getY());
                     distance[neighbour.getX()][neighbour.getY()] = newDistance;
-                    priorityQueue.add(new Pair(neighbour, newDistance + distanceToGoal));
-                    parents[neighbour.getX()][neighbour.getY()] = new Position(currentX, currentY);
+                    priorityQueue.add(new Pair(neighbour, newDistance));
+                    parents[neighbour.getX()][neighbour.getY()] = new Position(currentPosition.getX(), currentPosition.getY());
                 }
             }         
         }
         if (visited[goal.getX()][goal.getY()]) {
             found = true;
             helper.drawPath(parents, start, goal);
-            pathLength = distance[goal.getX()][goal.getY()];
+            pathLength = helper.getPathLength();
         }
+    }
+    
+    /**
+     * Calculates the Manhattan distance between specified position and goal position.
+     */ 
+    private int heuristic(Position position) {
+        return Math.abs(position.getX() - goal.getX()) + Math.abs(position.getY() - goal.getY());
     }
     
     /**

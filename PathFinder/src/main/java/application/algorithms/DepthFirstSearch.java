@@ -40,7 +40,7 @@ public class DepthFirstSearch {
     
     /**
      * Method that implements Depth-first-search by using a stack.
-     * Draws a path from start to goal if goal was found.
+     * Draws the path and gets path length by calling Helper-class.
      */ 
     public void search() {
         initializeMatrixes();
@@ -48,12 +48,10 @@ public class DepthFirstSearch {
         stack.add(start);
 
         while (!stack.isEmpty()) {
-            Position currentPosition = stack.pop();
-            
+            Position currentPosition = stack.pop();           
             if (visited[currentPosition.getX()][currentPosition.getY()]) {
                 continue;
-            }
-            
+            }            
             visited[currentPosition.getX()][currentPosition.getY()] = true;
             if (visited[goal.getX()][goal.getY()]) {
                 break;
@@ -68,7 +66,6 @@ public class DepthFirstSearch {
                     parents[neighbour.getX()][neighbour.getY()] = new Position(currentPosition.getX(), currentPosition.getY());
                 }
             }
-
         }
         if (visited[goal.getX()][goal.getY()]) {
             found = true;

@@ -22,20 +22,22 @@ public class Routefinder {
     private int dfsPathLength;
     private int dfsStepsTaken;
     private boolean dfsFoundPath;
+    private long dfsTimeSpent;
     
     private char[][] dijkstraMap;
     private int dijkstraPathLength;
     private int dijkstraStepsTaken;
     private boolean dijkstraFoundPath;
+    private long dijkstraTimeSpent;
     
     private char[][] astarMap;
     private int astarPathLength;
     private int astarStepsTaken;
     private boolean astarFoundPath;
+    private long astarTimeSpent;
 
     /**
      * Constructor for Routefinder.
-     * Initializes all values to null or zero.
      */
     public Routefinder() {
         this.map = null;
@@ -48,17 +50,19 @@ public class Routefinder {
         this.dfsPathLength = 0;
         this.dfsStepsTaken = 0;
         this.dfsFoundPath = false;
+        this.dfsTimeSpent = 0;
         
         this.dijkstraMap = null;
         this.dijkstraPathLength = 0;
         this.dijkstraStepsTaken = 0;
         this.dijkstraFoundPath = false;
+        this.dijkstraTimeSpent = 0;
         
         this.astarMap = null;
         this.astarPathLength = 0;
         this.astarStepsTaken = 0;
         this.astarFoundPath = false;
-
+        this.astarTimeSpent = 0;
     }
     
     /**
@@ -108,12 +112,14 @@ public class Routefinder {
         }
         char[][] mapCopy = copyArray(map);
         DepthFirstSearch dfs = new DepthFirstSearch(mapCopy, start, goal);
+        dfsTimeSpent = System.currentTimeMillis();
         dfs.search();
         if (dfs.isFound()) {
-            this.dfsPathLength = dfs.getPathLength();
-            this.dfsStepsTaken = dfs.getStepsTaken();
-            this.dfsFoundPath = dfs.isFound();
-            this.dfsMap = dfs.getMap();
+            dfsPathLength = dfs.getPathLength();
+            dfsStepsTaken = dfs.getStepsTaken();
+            dfsFoundPath = dfs.isFound();
+            dfsMap = dfs.getMap();
+            dfsTimeSpent = System.currentTimeMillis() - dfsTimeSpent;
         }
     }
     
@@ -127,12 +133,14 @@ public class Routefinder {
         }
         char[][] mapCopy = copyArray(map);
         Dijkstra dijkstra = new Dijkstra(mapCopy, start, goal);
+        dijkstraTimeSpent = System.currentTimeMillis();
         dijkstra.search();
         if (dijkstra.isFound()) {
-            this.dijkstraPathLength = dijkstra.getPathLength();
-            this.dijkstraStepsTaken = dijkstra.getStepsTaken();
-            this.dijkstraFoundPath = dijkstra.isFound();
-            this.dijkstraMap = dijkstra.getMap();
+            dijkstraPathLength = dijkstra.getPathLength();
+            dijkstraStepsTaken = dijkstra.getStepsTaken();
+            dijkstraFoundPath = dijkstra.isFound();
+            dijkstraMap = dijkstra.getMap();
+            dijkstraTimeSpent = System.currentTimeMillis() - dijkstraTimeSpent;
         }
     }
     
@@ -146,12 +154,14 @@ public class Routefinder {
         }
         char[][] mapCopy = copyArray(map);
         Astar astar = new Astar(mapCopy, start, goal);
+        astarTimeSpent = System.currentTimeMillis();
         astar.search();
         if (astar.isFound()) {
-            this.astarPathLength = astar.getPathLength();
-            this.astarStepsTaken = astar.getStepsTaken();
-            this.astarFoundPath = astar.isFound();
-            this.astarMap = astar.getMap();
+            astarPathLength = astar.getPathLength();
+            astarStepsTaken = astar.getStepsTaken();
+            astarFoundPath = astar.isFound();
+            astarMap = astar.getMap();
+            astarTimeSpent = System.currentTimeMillis() - astarTimeSpent;
         }
     }
     
@@ -221,6 +231,10 @@ public class Routefinder {
         return dfsFoundPath;
     }
 
+    public long getDfsTimeSpent() {
+        return dfsTimeSpent;
+    }
+
     public int getDijkstraPathLength() {
         return dijkstraPathLength;
     }
@@ -235,6 +249,10 @@ public class Routefinder {
 
     public char[][] getDijkstraMap() {
         return dijkstraMap;
+    }
+
+    public long getDijkstraTimeSpent() {
+        return dijkstraTimeSpent;
     }
 
     public char[][] getAstarMap() {
@@ -252,4 +270,9 @@ public class Routefinder {
     public boolean isAstarFoundPath() {
         return astarFoundPath;
     }
+
+    public long getAstarTimeSpent() {
+        return astarTimeSpent;
+    }
+    
 }

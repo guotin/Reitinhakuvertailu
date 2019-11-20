@@ -42,24 +42,22 @@ public class Dijkstra {
     /**
      * Method that implements Dijkstra's search.
      * Uses a priorityQueue to find a path.
-     * Draws a path to the original map when search is complete.
+     * Draws the path by calling Helper-class.
      */
     public void search() {
-        initializeMatrixes();
-       
+        initializeMatrixes();      
         PriorityQueue priorityQueue = new PriorityQueue();
         priorityQueue.add(new Pair(start, 0));
         
         while (!priorityQueue.isEmpty()) {
-            Position currentPosition = priorityQueue.remove().getPosition();
-            int currentX = currentPosition.getX();
-            int currentY = currentPosition.getY();
-            
-            if (visited[currentX][currentY]) {
+            Position currentPosition = priorityQueue.remove().getPosition();        
+            if (visited[currentPosition.getX()][currentPosition.getY()]) {
                 continue;
             }
-            visited[currentX][currentY] = true;
-            if (visited[goal.getX()][goal.getY()]) break;
+            visited[currentPosition.getX()][currentPosition.getY()] = true;
+            if (visited[goal.getX()][goal.getY()]) {
+                break;
+            }
             stepsTaken++;
             
             for (Position neighbour : helper.generateNeighbours(currentPosition)) {
@@ -67,11 +65,11 @@ public class Dijkstra {
                     continue;
                 }
                 int currentDistance = distance[neighbour.getX()][neighbour.getY()];
-                int newDistance = distance[currentX][currentY] + 1;
+                int newDistance = distance[currentPosition.getX()][currentPosition.getY()] + 1;
                 if (newDistance < currentDistance) {
                     distance[neighbour.getX()][neighbour.getY()] = newDistance;
                     priorityQueue.add(new Pair(neighbour, newDistance));
-                    parents[neighbour.getX()][neighbour.getY()] = new Position(currentX, currentY);
+                    parents[neighbour.getX()][neighbour.getY()] = new Position(currentPosition.getX(), currentPosition.getY());
                 }
             }         
         }
