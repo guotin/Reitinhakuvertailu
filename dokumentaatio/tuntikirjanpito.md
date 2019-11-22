@@ -13,4 +13,8 @@
 | 13.11. | 3  | Tiedostonlukuluokan toteutusta. PrioriorityQueue:n korvaajan pohdintaa.                          |
 | 14.11. | 5  | PriorityQueue-luokan toteutusta (minimikeko) ja JavaFX käyttöliittymän aloitusta.                |
 | 15.11. | 0,5  | Dokumentaatiota.                                                                               |
-| yht.  | 27  |                                                                                                |
+| Viikko 4 |   |                                                                                                 |
+| 18.11  | 4 | JavaFX käyttöliittymän jatkokehitystä.                                                            |
+| 20.11  | 4 | Syvyyshaun korjaus, pinon toteutus ja refaktorointia.                                             |
+| 22.11  | 1 | Dokumentaatiota.                                                                                  |
+| yht.  | 36  |                                                                                                |
