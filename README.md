@@ -6,7 +6,7 @@ Helsingin yliopiston Aineopintojen harjoitustyö: Tietorakenteet ja algoritmit -
 
 [Määrittelydokumentti](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/maarittely.md)
 
-[Toteustusdokumentti](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/toteutus.md)
+[Toteutusdokumentti](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/toteutus.md)
 
 [Testausdokumentti](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/testaus.md)
 
