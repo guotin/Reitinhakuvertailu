@@ -23,7 +23,7 @@ apuna.
 Ohjelman yksi suorituskykyvertailun muoto on käyttäjän itse valitsemien pisteiden välisen reitin muodostaminen ja sen tulokset.
 Tuloksista saa selville reitinhakemiseen käytetyn ajan (joka on melko pieni 512x512 kokoisilla kartoilla), reitin pituuden ja reitinhaun aikana käytyjen tilojen määrän.
 
-<img src="https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/kuvat/astar_esim.png" height=500> <img src="https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/kuvat/dijkstra_esim.png" height=500> <img src="https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/kuvat/dfs_esim.png" height=500>
+<img src="https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/kuvat/astar_esim.png" height=500 width=230> <img src="https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/kuvat/dijkstra_esim.png" height=500 width=230> <img src="https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/kuvat/dfs_esim.png" height=500 width=230>
 
 
 ## Puutteet ja parannusehdotukset
