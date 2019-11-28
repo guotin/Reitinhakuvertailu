@@ -2,6 +2,7 @@ package application.ui;
 
 import application.domain.Filereader;
 import application.datastructures.Position;
+import application.domain.Benchmark;
 import application.domain.Routefinder;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -14,6 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -24,6 +26,7 @@ public class AppUI extends Application {
 
     private Filereader reader;
     private Routefinder route;
+    private Benchmark benchmark;
     private Canvas canvas;
     private GraphicsContext gc;
     private char[][] currentMap;
@@ -35,6 +38,7 @@ public class AppUI extends Application {
         //Init canvas and draw file 'map1.map'
         reader = new Filereader();
         route = new Routefinder();
+        benchmark = new Benchmark(route);
         loadMap("map1.map");
         initCanvas();
         drawMap();
@@ -49,6 +53,8 @@ public class AppUI extends Application {
         Button button2 = new Button("Solve with Astar");
         Button button3 = new Button("Solve with DFS");
         Button button4 = new Button("Solve with Dijkstra");
+        Button button5 = new Button("Benchmark");
+        Button button6 = new Button("Info");
 
         //Start and goal selection
         RadioButton startSelection = new RadioButton("Start");
@@ -60,11 +66,26 @@ public class AppUI extends Application {
 
         Label startPosition = new Label("Not yet selected");
         Label goalPosition = new Label("Not yet selected");
+        
+        //Benchmark map selection
+        RadioButton benchmarkMapOne = new RadioButton("map1.map");
+        RadioButton benchmarkMapTwo = new RadioButton("map2.map");
+        RadioButton benchmarkMapThree = new RadioButton("map3.map");
+        ToggleGroup benchmarkGroup = new ToggleGroup();
+        benchmarkMapOne.setToggleGroup(benchmarkGroup);
+        benchmarkMapTwo.setToggleGroup(benchmarkGroup);
+        benchmarkMapThree.setToggleGroup(benchmarkGroup);
+        benchmarkMapOne.setSelected(true);
 
-        //Statistics
+        //Info table
         TextArea statistics = new TextArea();
         statistics.setMaxSize(400, 400);
         statistics.setEditable(false);
+        
+        //Benchmark iterations selector
+        TextField benchmarkIterations = new TextField();
+        benchmarkIterations.setText("500");
+        
 
         //List of maps available
         ListView mapList = new ListView();
@@ -88,9 +109,18 @@ public class AppUI extends Application {
         buttonGrid.add(button2, 2, 1);
         buttonGrid.add(button3, 3, 1);
         buttonGrid.add(button4, 4, 1);
-        buttonGrid.add(new Label("Statistics"), 5, 0);
+        buttonGrid.add(new Label("Information"), 5, 0);
         buttonGrid.add(statistics, 5, 1);
-
+        buttonGrid.add(button6, 5, 2);
+        buttonGrid.add(button5, 6, 1);
+        buttonGrid.add(new Label("Benchmark map         "), 6, 2);
+        buttonGrid.add(benchmarkMapOne, 6, 3);
+        buttonGrid.add(benchmarkMapTwo, 6, 4);
+        buttonGrid.add(benchmarkMapThree, 6, 5);
+        buttonGrid.add(new Label("Benchmark iterations"),7,2);
+        buttonGrid.add(benchmarkIterations, 7, 3);
+        
+        
         //Map change button functionality
         button1.setOnAction((event) -> {
             try {
@@ -166,6 +196,51 @@ public class AppUI extends Application {
                         + "Path was not found. \n");
             }
         });
+        
+        //Benchmark button functionality
+        button5.setOnAction((event) -> {
+            RadioButton selected = (RadioButton) benchmarkGroup.getSelectedToggle();
+            String mapName = selected.getText();
+            int iterations = Integer.valueOf(benchmarkIterations.getText());
+            loadMap(mapName);
+            drawMap();
+            mapSelectionLabel.setText("Current map: " + mapName);
+            benchmark.setMapChoice(Character.getNumericValue(mapName.charAt(3))); 
+            benchmark.setIterations(iterations);
+            benchmark.startBenchmark();
+            statistics.setText("Benchmarked all 3 algorithms in: " + mapName + "\n"
+                                + "Iterations: " + iterations + "\n"
+                                + "Results:\n\n"
+                                + "  Time spent finding paths:\n"
+                                + "    A*-algorithm: " + benchmark.getAstarTime() + "ms\n"
+                                + "    Dijkstra's-algorithm: " + benchmark.getDijkstraTime() + "ms\n"
+                                + "    Depth-first-search: " + benchmark.getDfsTime() + "ms\n\n"
+                                + "  Average path lengths:\n"
+                                + "    A*-algorithm: " + benchmark.getAvgAstarPathLength() + "\n"
+                                + "    Dijkstra's-algorithm: " + benchmark.getAvgDijkstraPathLength() + "\n"
+                                + "    Depth-first-search: " + benchmark.getAvgDfsPathLength() + "\n\n"
+                                + "  Average amount of positions visited:\n"
+                                + "    A*-algorithm: " + benchmark.getAvgAstarStepsTaken() + "\n"
+                                + "    Dijkstra's-algorithm: " + benchmark.getAvgDijkstraStepsTaken() + "\n"
+                                + "    Depth-first-search: " + benchmark.getAvgDfsStepsTaken() + "\n\n");
+        });
+        
+        //Info button functionality
+        button6.setOnAction((event) -> {
+            statistics.setText("Pathfinding functionality:\n"
+                                + "* Choose a map from the list\n"
+                                + "* Choose start and goal nodes by clicking the map\n"
+                                + "* Select which algorithm to use with the labeled buttons\n"
+                                + "* Path is drawn on the map and information is displayed here\n\n"
+                                + "Benchmarking functionality:\n"
+                                + "* Choose a benchmarking map from the specified selector\n"
+                                + "* Choose the iteration amount by typing it in the specified box\n"
+                                + "   (Warning: high amount of iterations might take very long to compute)\n"
+                                + "* The benchmarking utility will now find paths between a set\n"
+                                + "   of start and goal nodes and information is diplayed here ");
+        });
+        
+        
 
         //Canvas click to set start or goal
         canvas.setOnMouseClicked((event) -> {
@@ -190,7 +265,7 @@ public class AppUI extends Application {
         BorderPane borderPane = new BorderPane();
         borderPane.setCenter(scrollPane);
         borderPane.setBottom(buttonGrid);
-        borderPane.setPrefSize(1280, 720);
+        borderPane.setPrefSize(1920, 1080);
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
         primaryStage.show();
