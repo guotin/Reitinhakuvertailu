@@ -86,8 +86,6 @@ public class PriorityQueue {
     /**
      * Adjust the heap back to min-heap condition starting from the root
      * after removal of the head.
-     *
-     * @param index is the index of the element currently being adjusted.
      */
     private void removeAdjust() {      
         int index = 1;
