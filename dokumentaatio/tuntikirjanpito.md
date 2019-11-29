@@ -17,4 +17,7 @@
 | 18.11  | 4 | JavaFX käyttöliittymän jatkokehitystä.                                                            |
 | 20.11  | 4 | Syvyyshaun korjaus, pinon toteutus ja refaktorointia.                                             |
 | 22.11  | 1 | Dokumentaatiota.                                                                                  |
-| yht.  | 36  |                                                                                                |
+| Viikko 5 |   |                                                                                                 |
+| 28.11  | 4 | Suorityskykytestausluokan aloitus ja käyttöliittymän parannusta.                                  |
+| 29.11  | 1 | Testailua ja dokumentaatiota.                                                                     |
+| yht.  | 41  |                                                                                                |
