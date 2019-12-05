@@ -30,10 +30,22 @@ jacocoTestReport {
     }
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: 'application/ui**')
-        }))
+                    fileTree(dir: it, exclude: 'application/ui**')
+                }))
     }
 }
 
 check.dependsOn jacocoTestReport
 
+sourceSets {
+    main {
+        resources {
+            srcDirs = ['src/resources']
+        }
+    }
+}
+jar {
+    manifest {
+        attributes 'Main-Class': 'application.ui.Main'
+    }
+}

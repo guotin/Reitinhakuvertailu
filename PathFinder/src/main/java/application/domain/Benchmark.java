@@ -8,6 +8,7 @@ import application.datastructures.Position;
 public class Benchmark {
 
     private Routefinder routefinder;
+    private Filereader reader;
     private Position[] positions;
     private int mapChoice;
     private int iterations;
@@ -26,7 +27,8 @@ public class Benchmark {
 
     public Benchmark(Routefinder routefinder) {
         this.routefinder = routefinder;
-        this.positions = new Position[8];
+        this.reader = new Filereader();
+        this.positions = new Position[16];
         this.astarTime = 0;
         this.dijkstraTime = 0;
         this.dfsTime = 0;
@@ -44,35 +46,7 @@ public class Benchmark {
      * Creates test positions based on map choice
      */
     public void initPositions() {
-        if (mapChoice == 1) {
-            positions[0] = new Position(208, 81);
-            positions[1] = new Position(194, 100);
-            positions[2] = new Position(183, 114);
-            positions[3] = new Position(164, 144);
-            positions[4] = new Position(417, 187);
-            positions[5] = new Position(433, 245);
-            positions[6] = new Position(486, 270);
-            positions[7] = new Position(475, 354);
-        } else if (mapChoice == 2) {
-            positions[0] = new Position(364, 46);
-            positions[1] = new Position(199, 23);
-            positions[2] = new Position(102, 87);
-            positions[3] = new Position(84, 361);
-            positions[4] = new Position(360, 314);
-            positions[5] = new Position(301, 293);
-            positions[6] = new Position(503, 265);
-            positions[7] = new Position(356, 204);
-        } else {
-            positions[0] = new Position(100, 23);
-            positions[1] = new Position(220, 26);
-            positions[2] = new Position(441, 140);
-            positions[3] = new Position(89, 418);
-            positions[4] = new Position(238, 308);
-            positions[5] = new Position(496, 490);
-            positions[6] = new Position(332, 480);
-            positions[7] = new Position(293, 233);
-        }
-
+        positions = reader.readTestPos("map"+mapChoice+"_pos.txt");
     }
 
     /**
@@ -83,15 +57,16 @@ public class Benchmark {
         initPositions();
         int index = 0;
         for (int i = 0; i < iterations; i++) {
-            if (index > 7) {
+            if (index > 15) {
                 index = 0;
             }
             routefinder.setStart(positions[index]);
-            routefinder.setGoal(positions[7 - index]);
+            routefinder.setGoal(positions[15 - index]);
             routefinder.findRouteDFS();
             routefinder.findRouteAstar();
             routefinder.findRouteDijkstra();
             storeStatistics();
+            index++;
         }
     }
     
