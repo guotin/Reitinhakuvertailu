@@ -20,4 +20,7 @@
 | Viikko 5 |   |                                                                                                 |
 | 28.11  | 4 | Suorityskykytestausluokan aloitus ja käyttöliittymän parannusta.                                  |
 | 29.11  | 1 | Testailua ja dokumentaatiota.                                                                     |
-| yht.  | 41  |                                                                                                |
+| Viikko 6 |   |                                                                                                 |
+| 5.12  | 3 | Suorituskykytestauksen parannusta.                                                                 |
+| 6.12  | 0,5 | Javadoc parannuksia ja dokumentaatiota.                                                          |
+| yht.  | 44,5  |                                                                                                |
