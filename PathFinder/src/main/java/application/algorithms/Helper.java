@@ -2,6 +2,9 @@ package application.algorithms;
 
 import application.datastructures.Position;
 
+/**
+ * Class that provides helper methods for algorithm-classes.
+ */
 public class Helper {
     
     private char[][] map;
@@ -67,6 +70,5 @@ public class Helper {
 
     public int getPathLength() {
         return pathLength;
-    }        
-    
+    } 
 }

@@ -36,7 +36,6 @@ public class PriorityQueue {
     /**
      * Adds a new 'Pair' to the priorityqueue. Negative values (distance) not
      * allowed.
-     *
      * @param pair is the pair to be added.
      */
     public void add(Pair pair) {
@@ -189,5 +188,4 @@ public class PriorityQueue {
     public boolean isEmpty() {
         return (elementCount == 0);
     }
-
 }

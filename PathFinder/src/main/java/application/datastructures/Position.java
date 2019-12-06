@@ -1,7 +1,7 @@
 package application.datastructures;
 
 /**
- * Holds two coordinates, X and Y.
+ * Class that holds two coordinates, X and Y.
  */
 public class Position {
     private int x;
@@ -23,7 +23,5 @@ public class Position {
     @Override
     public String toString() {
         return "(" + this.x + ", " + this.y + ")";
-    }
-    
-    
+    }  
 }

@@ -145,5 +145,4 @@ public class Benchmark {
     public void setMapChoice(int mapChoice) {
         this.mapChoice = mapChoice;
     }
-
 }

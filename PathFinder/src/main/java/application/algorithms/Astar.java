@@ -5,7 +5,7 @@ import application.datastructures.Pair;
 import application.datastructures.PriorityQueue;
 
 /**
- * A class that implements Astar-search-algorithm.
+ * Class that implements Astar-search algorithm.
  */
 public class Astar {
     
@@ -122,6 +122,5 @@ public class Astar {
 
     public int[][] getDistance() {
         return distance;
-    }
-    
+    }  
 }

@@ -4,7 +4,7 @@ import application.datastructures.Position;
 import application.datastructures.Pair;
 import application.datastructures.PriorityQueue;
 /**
- * A class that implements Dijkstra's search algorithm.
+ * Class that implements Dijkstra's search algorithm.
  */
 public class Dijkstra {
     

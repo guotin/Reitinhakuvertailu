@@ -59,8 +59,7 @@ public class Filereader {
             }
         } catch (Exception ex) {
             Logger.getLogger(Filereader.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }        
         return positions;
     }
 }

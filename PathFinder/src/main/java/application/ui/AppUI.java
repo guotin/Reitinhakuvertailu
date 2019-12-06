@@ -22,6 +22,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * JavaFX GUI
+ */
 public class AppUI extends Application {
 
     private Filereader reader;
@@ -86,7 +89,6 @@ public class AppUI extends Application {
         TextField benchmarkIterations = new TextField();
         benchmarkIterations.setText("500");
         
-
         //List of maps available
         ListView mapList = new ListView();
         for (int i = 1; i < 12; i++) {
@@ -119,8 +121,7 @@ public class AppUI extends Application {
         buttonGrid.add(benchmarkMapThree, 6, 5);
         buttonGrid.add(new Label("Benchmark iterations"),7,2);
         buttonGrid.add(benchmarkIterations, 7, 3);
-        
-        
+              
         //Map change button functionality
         button1.setOnAction((event) -> {
             try {
@@ -239,9 +240,7 @@ public class AppUI extends Application {
                                 + "* The benchmarking utility will now find paths between a set\n"
                                 + "   of start and goal nodes and information is diplayed here ");
         });
-        
-        
-
+              
         //Canvas click to set start or goal
         canvas.setOnMouseClicked((event) -> {
             RadioButton selected = (RadioButton) group.getSelectedToggle();
@@ -297,7 +296,6 @@ public class AppUI extends Application {
             }
         }
         gc.scale(0.25, 0.25);
-
     }
 
     private void findRouteDijkstra() {
@@ -326,5 +324,4 @@ public class AppUI extends Application {
         currentMap = map;
         route.setMap(map);
     }
-
 }

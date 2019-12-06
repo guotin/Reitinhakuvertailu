@@ -193,7 +193,6 @@ public class Routefinder {
         this.start = start;
     }
     
-
     public Position getStart() {
         return start;
     }
@@ -273,6 +272,5 @@ public class Routefinder {
 
     public long getAstarTimeSpent() {
         return astarTimeSpent;
-    }
-    
+    }  
 }

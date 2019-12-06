@@ -1,7 +1,8 @@
 package application.datastructures;
 
 /**
- * A class that created a pair with A position and its distance. Used with priorityQueue.
+ * Class that creates a pair with a position and its distance. 
+ * Used with priorityQueue.
  */
 public class Pair implements Comparable<Pair> {
     private Position position;
@@ -23,6 +24,5 @@ public class Pair implements Comparable<Pair> {
     @Override
     public int compareTo(Pair o) {
         return this.distance - o.distance;
-    }
-    
+    }  
 }

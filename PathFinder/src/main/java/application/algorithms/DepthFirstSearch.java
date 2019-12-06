@@ -21,7 +21,6 @@ public class DepthFirstSearch {
     /**
      * Constructor for Depth-first-search. Creates a boolean array to mark
      * visited positions.
-     *
      * @param map is the map where path is searched.
      * @param start is the starting position.
      * @param goal is the goal position.
@@ -101,5 +100,4 @@ public class DepthFirstSearch {
     public boolean isFound() {
         return found;
     }
-
 }
