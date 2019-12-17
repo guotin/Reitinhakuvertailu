@@ -69,7 +69,7 @@ public class AppUI extends Application {
 
         Label startPosition = new Label("Not yet selected");
         Label goalPosition = new Label("Not yet selected");
-        
+
         //Benchmark map selection
         RadioButton benchmarkMapOne = new RadioButton("map1.map");
         RadioButton benchmarkMapTwo = new RadioButton("map2.map");
@@ -84,11 +84,11 @@ public class AppUI extends Application {
         TextArea statistics = new TextArea();
         statistics.setMaxSize(400, 400);
         statistics.setEditable(false);
-        
+
         //Benchmark iterations selector
         TextField benchmarkIterations = new TextField();
         benchmarkIterations.setText("500");
-        
+
         //List of maps available
         ListView mapList = new ListView();
         for (int i = 1; i < 12; i++) {
@@ -119,9 +119,9 @@ public class AppUI extends Application {
         buttonGrid.add(benchmarkMapOne, 6, 3);
         buttonGrid.add(benchmarkMapTwo, 6, 4);
         buttonGrid.add(benchmarkMapThree, 6, 5);
-        buttonGrid.add(new Label("Benchmark iterations"),7,2);
+        buttonGrid.add(new Label("Benchmark iterations"), 7, 2);
         buttonGrid.add(benchmarkIterations, 7, 3);
-              
+
         //Map change button functionality
         button1.setOnAction((event) -> {
             try {
@@ -197,50 +197,55 @@ public class AppUI extends Application {
                         + "Path was not found. \n");
             }
         });
-        
+
         //Benchmark button functionality
         button5.setOnAction((event) -> {
             RadioButton selected = (RadioButton) benchmarkGroup.getSelectedToggle();
             String mapName = selected.getText();
-            int iterations = Integer.valueOf(benchmarkIterations.getText());
-            loadMap(mapName);
-            drawMap();
-            mapSelectionLabel.setText("Current map: " + mapName);
-            benchmark.setMapChoice(Character.getNumericValue(mapName.charAt(3))); 
-            benchmark.setIterations(iterations);
-            benchmark.startBenchmark();
-            statistics.setText("Benchmarked all 3 algorithms in: " + mapName + "\n"
-                                + "Iterations: " + iterations + "\n"
-                                + "Results:\n\n"
-                                + "  Time spent finding paths:\n"
-                                + "    A*-algorithm: " + benchmark.getAstarTime() + "ms\n"
-                                + "    Dijkstra's-algorithm: " + benchmark.getDijkstraTime() + "ms\n"
-                                + "    Depth-first-search: " + benchmark.getDfsTime() + "ms\n\n"
-                                + "  Average path lengths:\n"
-                                + "    A*-algorithm: " + benchmark.getAvgAstarPathLength() + "\n"
-                                + "    Dijkstra's-algorithm: " + benchmark.getAvgDijkstraPathLength() + "\n"
-                                + "    Depth-first-search: " + benchmark.getAvgDfsPathLength() + "\n\n"
-                                + "  Average amount of positions visited:\n"
-                                + "    A*-algorithm: " + benchmark.getAvgAstarStepsTaken() + "\n"
-                                + "    Dijkstra's-algorithm: " + benchmark.getAvgDijkstraStepsTaken() + "\n"
-                                + "    Depth-first-search: " + benchmark.getAvgDfsStepsTaken() + "\n\n");
+            try {
+                int iterations = Integer.valueOf(benchmarkIterations.getText());
+                loadMap(mapName);
+                drawMap();
+                mapSelectionLabel.setText("Current map: " + mapName);
+                benchmark.setMapChoice(Character.getNumericValue(mapName.charAt(3)));
+                benchmark.setIterations(iterations);
+                benchmark.startBenchmark();
+                statistics.setText("Benchmarked all 3 algorithms in: " + mapName + "\n"
+                        + "Iterations: " + iterations + "\n"
+                        + "Results:\n\n"
+                        + "  Time spent finding paths:\n"
+                        + "    A*-algorithm: " + benchmark.getAstarTime() + "ms\n"
+                        + "    Dijkstra's-algorithm: " + benchmark.getDijkstraTime() + "ms\n"
+                        + "    Depth-first-search: " + benchmark.getDfsTime() + "ms\n\n"
+                        + "  Average path lengths:\n"
+                        + "    A*-algorithm: " + benchmark.getAvgAstarPathLength() + "\n"
+                        + "    Dijkstra's-algorithm: " + benchmark.getAvgDijkstraPathLength() + "\n"
+                        + "    Depth-first-search: " + benchmark.getAvgDfsPathLength() + "\n\n"
+                        + "  Average amount of positions visited:\n"
+                        + "    A*-algorithm: " + benchmark.getAvgAstarStepsTaken() + "\n"
+                        + "    Dijkstra's-algorithm: " + benchmark.getAvgDijkstraStepsTaken() + "\n"
+                        + "    Depth-first-search: " + benchmark.getAvgDfsStepsTaken() + "\n\n");
+            } catch (NumberFormatException e) {
+                statistics.setText("Iterations need to be in number format!\n"
+                        + "Check input and try again.");
+            }
         });
-        
+
         //Info button functionality
         button6.setOnAction((event) -> {
             statistics.setText("Pathfinding functionality:\n"
-                                + "* Choose a map from the list\n"
-                                + "* Choose start and goal nodes by clicking the map\n"
-                                + "* Select which algorithm to use with the labeled buttons\n"
-                                + "* Path is drawn on the map and information is displayed here\n\n"
-                                + "Benchmarking functionality:\n"
-                                + "* Choose a benchmarking map from the specified selector\n"
-                                + "* Choose the iteration amount by typing it in the specified box\n"
-                                + "   (Warning: high amount of iterations might take very long to compute)\n"
-                                + "* The benchmarking utility will now find paths between a set\n"
-                                + "   of start and goal nodes and information is diplayed here ");
+                    + "* Choose a map from the list\n"
+                    + "* Choose start and goal nodes by clicking the map\n"
+                    + "* Select which algorithm to use with the labeled buttons\n"
+                    + "* Path is drawn on the map and information is displayed here\n\n"
+                    + "Benchmarking functionality:\n"
+                    + "* Choose a benchmarking map from the specified selector\n"
+                    + "* Choose the iteration amount by typing it in the specified box\n"
+                    + "   (Warning: high amount of iterations might take very long to compute)\n"
+                    + "* The benchmarking utility will now find paths between a set\n"
+                    + "   of start and goal nodes and information is diplayed here ");
         });
-              
+
         //Canvas click to set start or goal
         canvas.setOnMouseClicked((event) -> {
             RadioButton selected = (RadioButton) group.getSelectedToggle();
