@@ -19,7 +19,7 @@ public class BenchmarkTest {
         routefinder = new Routefinder();
         benchmark = new Benchmark(routefinder);
         filereader = new Filereader();
-        routefinder.setMap(filereader.readFile("map1.map", 512, 512));
+        routefinder.setMap(filereader.readMapFile("map1.map", 512, 512));
         benchmark.setIterations(5);
         
     }

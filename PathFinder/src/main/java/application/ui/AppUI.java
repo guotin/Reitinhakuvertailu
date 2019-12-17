@@ -320,7 +320,7 @@ public class AppUI extends Application {
     }
 
     private void loadMap(String file) {
-        char[][] map = reader.readFile(file, 512, 512);
+        char[][] map = reader.readMapFile(file, 512, 512);
         currentMap = map;
         route.setMap(map);
     }

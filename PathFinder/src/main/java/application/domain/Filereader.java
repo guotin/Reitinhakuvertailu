@@ -20,7 +20,7 @@ public class Filereader {
      * @param sizeY y length of the 2d map in the file.
      * @return 2d char array.
      */
-    public char[][] readFile(String filename, int sizeX, int sizeY) {
+    public char[][] readMapFile(String filename, int sizeX, int sizeY) {
         char[][] map = new char[sizeX][sizeY];
         try {
             InputStream inputStream = getClass().getResourceAsStream("/"+filename);

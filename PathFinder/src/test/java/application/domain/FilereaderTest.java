@@ -1,14 +1,9 @@
 package application.domain;
 
 import application.datastructures.Position;
-import java.io.FileNotFoundException;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
 
 public class FilereaderTest {
     
@@ -21,7 +16,7 @@ public class FilereaderTest {
     
     @Test
     public void readFileMatchesRealMap1() {
-        char[][] readMap = reader.readFile("testmap1.map", 2, 6);
+        char[][] readMap = reader.readMapFile("testmap1.map", 2, 6);
         char[][] map = {
             {'S','.','.','.','.','@'},
             {'.','.','T','.','.','G'},        
@@ -31,7 +26,7 @@ public class FilereaderTest {
     
     @Test
     public void readFileMatchesRealMap2() {
-        char[][] readMap = reader.readFile("testmap2.map", 10, 10);
+        char[][] readMap = reader.readMapFile("testmap2.map", 10, 10);
         char[][] map = {
             {'W','S','W','W','W','W','W','W','W','W'},
             {'W','.','.','.','.','.','.','.','.','W'},

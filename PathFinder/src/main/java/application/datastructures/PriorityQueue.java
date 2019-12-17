@@ -48,14 +48,14 @@ public class PriorityQueue {
         queue[nextFreeIndex] = pair;
         nextFreeIndex++;
         elementCount++;
-        addAjust();
+        addAdjust();
     }
 
     /**
      * Method that adjust the heap back to min-heap condition after adding a new
      * element.
      */
-    private void addAjust() {
+    private void addAdjust() {
         int currentIndex = elementCount;
         int parentIndex = parent(currentIndex);
 
