@@ -25,13 +25,41 @@ Ohjelman yksikkötestaus hoidetaan JUnit-testeillä. Testattavat asiat riippuvat
 - `Filereader`-luokka
 
    Testeissä luetaan muutama kartta ja testipisteet tiedostoista ja vertaillaan tuloksia haluttuun.
+
+- `Benchmark`-luokka
+   
+   Testeissä tarkastetaan, että suorituskykytestaus muuttaa arvoja suorituksen aikana.
    
 JavaFX:llä luotua käyttöliittymää ei testata ja se on jätetty testikattavuusraportin ulkopuolelle.
 
-Sovelluksen testauskattavuus:
+Sovelluksen testikattavuus:
 
 <img src="https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/kuvat/testikattavuus.png">
    
 ## Suorituskykytestaus
+
+Suorituskykytestauksessa otetaan huomioon reitinhakuun käytetty aika, löydetyn reitin pituus ja käytyjen tilojen määrä. 
+Suorituskykytestausta tehtiin kolmessa mahdollisimmaan erimuotoisessa kartassa.
+
+### Käytetty aika
+
+#### Testikartta 1 (map1.map)
+
+<img src="https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/kuvat/map1_aika.png">
+
+#### Testikartta 2 (map2.map)
+
+<img src="https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/kuvat/map2_aika.png">
+
+#### Testikartta 3 (map3.map)
+
+<img src="https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/kuvat/map3_aika.png">
+
+### Reitin pituus
+
+### Käydyt tilat
+
+
+### Muuta
 
 Hakualgoritmien suorituskykyä voi testata manuaalisesti käyttöliittymän avulla (kts. [toteutusdokumentti](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/toteutus.md)).
