@@ -24,9 +24,13 @@ Ohjelman yksikkötestaus hoidetaan JUnit-testeillä. Testattavat asiat riippuvat
    
 - `Filereader`-luokka
 
-   Testeissä luetaan muutama kartta testitiedostoista ja vertaillaan tuloksia haluttuun.
+   Testeissä luetaan muutama kartta ja testipisteet tiedostoista ja vertaillaan tuloksia haluttuun.
    
 JavaFX:llä luotua käyttöliittymää ei testata ja se on jätetty testikattavuusraportin ulkopuolelle.
+
+Sovelluksen testauskattavuus:
+
+<img src="https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/kuvat/testikattavuus.png">
    
 ## Suorituskykytestaus
 
