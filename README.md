@@ -12,6 +12,10 @@ Helsingin yliopiston Aineopintojen harjoitustyö: Tietorakenteet ja algoritmit -
 
 [Tuntikirjanpito](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/tuntikirjanpito.md)
 
+[Käyttöohje](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/ohje.md)
+
+[Valmiiksi generoitu JavaDoc](https://github.com/guotin/Reitinhakuvertailu/tree/master/dokumentaatio/javadoc)
+
 ## Viikkoraportit
 
 [Viikko 1](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/viikkoraportit/viikko_1.md)
@@ -25,31 +29,3 @@ Helsingin yliopiston Aineopintojen harjoitustyö: Tietorakenteet ja algoritmit -
 [Viikko 5](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/viikkoraportit/viikko_5.md)
 
 [Viikko 6](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/viikkoraportit/viikko_6.md)
-
-## Komentorivitoiminnot
-
-### Testaus
-
-Testit suoritetaan komennolla
-
-`gradle test` tai `./gradlew test `
-
-Testikattavuusraportti luodaan komennolla
-
-`gradle test jacocoTestReport` tai `./gradlew test jacocoTestReport`
-
-Kattavuusraporttia voi tarkastella avaamalla selaimella tiedoston _build/reports/jacoco/test/html/index.html_
-
-### Javadoc
-
-Javadocin voi generoida komennolla
-
-`gradle javadoc` tai `./gradlew javadoc`
-
-Javadocia voi tarkastella avaamalla selaimella tiedoston _build/docs/javadoc/index.html
-
-### Checkstyle
-
-Tiedoston [checkstyle.xml](https://github.com/guotin/Reitinhakuvertailu/blob/master/PathFinder/config/checkstyle/checkstyle.xml) määrittelemät tarkistukset suoritetaan komennolla
-
-`gradle checkstyleMain` tai `./gradlew checkstyleMain`
