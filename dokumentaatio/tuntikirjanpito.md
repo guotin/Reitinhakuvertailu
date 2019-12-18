@@ -23,4 +23,7 @@
 | Viikko 6 |   |                                                                                                 |
 | 5.12  | 3 | Suorituskykytestauksen parannusta.                                                                 |
 | 6.12  | 0,5 | Javadoc parannuksia ja dokumentaatiota.                                                          |
-| yht.  | 44,5  |                                                                                                |
+| Lopetus  |  |                                                                                                  |
+| 17.12  | 2 | Projektin parantelua ja dokumentaatiota.                                                          |
+| 18.12  | 2 | Projektin parantelua ja dokumentaatiota.                                                          |
+| yht.  | 48,5  |                                                                                                |
