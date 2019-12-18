@@ -62,7 +62,7 @@ tulostetaan käyttäjälle ja siitä selviää käytetty aika millisekunteina, k
 
 ## Puutteet ja parannusehdotukset
 
-
+Ohjelman käyttöliittymää voisi parantaa esimerkiksi tarjoamalla käyttäjälle mahdollisuuden valita itse piirretyn kartan skaalaus. Suorituskykytestausta voisi myös parantaa lisäämällä siihen jotain satunnaisuutta ja ehkä laajentamalla testipisteiden joukkoa. A*-algoritmin heuristiikan voisi myös korjata siten, että se palauttaisi kaikissa tapauksissa lyhimmän reitin. Tällä hetkellä joissain reunatapauksissa näin ei tapahdu.
 
 ## Lähteet
 
