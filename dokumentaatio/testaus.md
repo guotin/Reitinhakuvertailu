@@ -85,6 +85,8 @@ Suorituskykytestauksessa tarkasteltiin keskimääräistä löydetyn reitin pituu
 | Dijkstran algoritmi     | 464                       | 363                      | 622                     |
 | Syvyyshaku              | 17782                     | 38770                    | 10679                   |
 
+<img src="https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/kuvat/reitin_pituus.png">
+
 
 ### Käydyt tilat
 
@@ -96,9 +98,14 @@ Myös käytyjen tilojen tapauksessa tarkasteltiin keskimääräistä tapausta. I
 | Dijkstran algoritmi     | 59964                     | 45166                    | 34831                   |
 | Syvyyshaku              | 49277                     | 63903                    | 33366                   |
 
+<img src="https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/kuvat/tilat.png">
+
 ### Päätelmät
 
+Huomataan, että syvyyshaku on varsin nopea löytämään jonkin reitin. Manhattan etäisyys -heuristiikalla toimiva A*-algoritmi taas on hieman Dijkstran algoritmia nopeampi löytämään lyhimmän reitin. Heuristiikka ei ole kuitenkaan ihan täydellisesti toteutettu, sillä löydytty reitti on joissain reunatapauksissa lyhintä reittiä muutaman askeleen pidempi. Syvyyshaun löytämät reitin olivat aina todella pitkiä.
 
-### Muuta
+Käytyjen tilojen määrää tarkastellessa huomattiin, että A*-algoritmin heuristiikasta on hyötyä. Käytyjen tilojen määrä oli varsinkin hyvin avoimessa kartassa (map2.map) paljon pienempi kuin muiden algoritmien.
 
-Hakualgoritmien suorituskykyä voi testata manuaalisesti käyttöliittymän avulla (kts. [toteutusdokumentti](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/toteutus.md)).
+## Muuta
+
+Kaikki testitapaukset ovat toistettavissa. Ohjeet yksikkö- ja suorituskykytestaukseen löytyvät [käyttöohjeesta](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/ohje.md). Myös [toteutusdokumentissa](https://github.com/guotin/Reitinhakuvertailu/blob/master/dokumentaatio/toteutus.md) on havainnollistavia kuvia suorituskykytestauksesta.
