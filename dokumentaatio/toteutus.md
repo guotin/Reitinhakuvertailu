@@ -26,7 +26,7 @@ apuna.
 | ----------------------- |  Keskimääräinen tapaus | Pahin tapaus |
 | ----------------------- | ---------------------  | ------------ |
 | Tilavaativuus           | O(n)                   | O(n)         |
-| Lisäyksen aikavaativuus | O(1)                   | O(log n)     |
+| Lisäyksen aikavaativuus | O(log n)               | O(log n)     |
 | Poiston aikavaativuus   | O(log n)               | O(log n)     |
 
 * Pino
